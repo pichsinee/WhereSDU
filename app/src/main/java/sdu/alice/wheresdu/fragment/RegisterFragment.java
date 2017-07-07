@@ -6,9 +6,12 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
+import sdu.alice.wheresdu.MyAlert;
 import sdu.alice.wheresdu.R;
 
 /**
@@ -17,6 +20,8 @@ import sdu.alice.wheresdu.R;
 
 public class RegisterFragment extends Fragment {
 
+    //Explicite
+    private String nameString, userString, passwordString;
 
     public static RegisterFragment registerInstance() {
         RegisterFragment registerFragment = new RegisterFragment();
@@ -41,6 +46,57 @@ public class RegisterFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
         //Back Controller
+        backController();
+
+        //New Register Controller
+        newRegisterController();
+
+    }   //onActivityCreated
+
+    private void newRegisterController() {
+
+        //Initial View ทำการผูกตัวแปรบน xml (id ของ view) ให้ java รู้จัก
+        final EditText nameEditText = (EditText) getView().findViewById(R.id.edtName);
+        final EditText userEditText = (EditText) getView().findViewById(R.id.edtUser);
+        final EditText passwordEditText = (EditText) getView().findViewById(R.id.edtPassword);
+        Button newRegisterButton = (Button) getView().findViewById(R.id.btnNewRegister);
+
+        //Get Event From Click New Register
+        newRegisterButton.setOnClickListener(new View.OnClickListener() {  //ในวงเล็บกด n เลือก new กด O เลือก OnClickListener()
+            @Override
+            public void onClick(View view) {
+
+                //Get Value From EditText
+                nameString = nameEditText.getText().toString().trim();
+                userString = userEditText.getText().toString().trim();
+                passwordString = passwordEditText.getText().toString().trim();
+
+                //Check Space
+                if (nameString.length() == 0
+                        || userString.length() == 0
+                        || passwordString.length() ==0) { //ถ้าช่อง Name,User,Password เป็นค่าว่าง
+                    //Have Space ถ้ามีค่าว่างเกิดขึ้น ให้แสดง Alert
+                    MyAlert myAlert = new MyAlert(getActivity());
+                    myAlert.myDialog("Have Space", "Please Fill All Every Blank");
+
+                } else {
+                    //No Space ถ้าไม่ว่าง ให้ตรวจสอบว่า ใส่ค่า user&pass ถูกต้องหรือไม่
+                    uploadValueToServer();
+
+
+                }
+
+            }   //OnClickListener
+        });
+
+    }   //newRegisterController
+
+    private void uploadValueToServer() {
+
+
+    }
+
+    private void backController() {
         ImageView imageView = (ImageView) getView().findViewById(R.id.imvBack);
         imageView.setOnClickListener(new View.OnClickListener() {   //ในวงเล็บพิมพ์ n เลือก new พิมพ์ O เลือก OnClickListener()
             @Override
@@ -50,6 +106,7 @@ public class RegisterFragment extends Fragment {
                         .replace(R.id.frangmentContent, MainFragment.mainInstance()).commit();
             }
         });
-
     }
+
+
 }   //Main Class

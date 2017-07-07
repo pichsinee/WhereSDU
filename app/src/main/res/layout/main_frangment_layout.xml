@@ -11,7 +11,7 @@
 
     <!--For Authen-->
     <LinearLayout
-        android:background="#7fffffff"
+        android:background="#9fffffff"
         android:layout_margin="20dp"
         android:padding="15dp"
         android:layout_width="match_parent"
