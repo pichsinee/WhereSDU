@@ -7,8 +7,17 @@ package sdu.alice.wheresdu;
 public class MyConstant {
 
     private String urlAddress = "http://androidthai.in.th/sdu/addDataAOM.php";
+    private String urlJSON = "http://androidthai.in.th/sdu/getAllDataAOM.php";
+
+    public String getUrlJSON() {
+
+
+        return urlJSON;
+    }
 
     public String getUrlAddress() {
+
+
         return urlAddress;
     }
 }   //Main Class

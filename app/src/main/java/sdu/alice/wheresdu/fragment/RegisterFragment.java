@@ -3,6 +3,7 @@ package sdu.alice.wheresdu.fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,8 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import sdu.alice.wheresdu.MyAlert;
+import sdu.alice.wheresdu.MyConstant;
+import sdu.alice.wheresdu.PostNewUser;
 import sdu.alice.wheresdu.R;
 
 /**
@@ -77,7 +80,7 @@ public class RegisterFragment extends Fragment {
                         || passwordString.length() ==0) { //ถ้าช่อง Name,User,Password เป็นค่าว่าง
                     //Have Space ถ้ามีค่าว่างเกิดขึ้น ให้แสดง Alert
                     MyAlert myAlert = new MyAlert(getActivity());
-                    myAlert.myDialog("Have Space", "Please Fill All Every Blank");
+                    myAlert.myDialog(getString(R.string.title_have), getString(R.string.message_have));
 
                 } else {
                     //No Space ถ้าไม่ว่าง ให้ตรวจสอบว่า ใส่ค่า user&pass ถูกต้องหรือไม่
@@ -92,6 +95,29 @@ public class RegisterFragment extends Fragment {
 
     private void uploadValueToServer() {
 
+        String tag = "7JulyV1";
+        MyConstant myConstant = new MyConstant();
+        String urlPHP = myConstant.getUrlAddress();
+
+        try {
+
+            PostNewUser postNewUser = new PostNewUser(getActivity());
+            postNewUser.execute(nameString, userString, passwordString, urlPHP);    //ตัวแปรที่ส่งขึ้นไป add ใน server
+            String result = postNewUser.get();  //แสดงผลลัพธืการทำงาน
+            Log.d(tag, "result ==> " + result);
+
+            if (Boolean.parseBoolean(result)) { //เมื่อผลการทำงานเป็น true แปลงค่า String คำว่า true เป็น Boolean และทำการกลับไปยังหน้า Main Fragment
+
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.frangmentContent, MainFragment.mainInstance())
+                        .commit();
+
+            } else {
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
 
