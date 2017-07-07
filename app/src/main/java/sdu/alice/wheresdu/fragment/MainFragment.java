@@ -17,6 +17,13 @@ import sdu.alice.wheresdu.R;
 
 public class MainFragment extends Fragment {
 
+    public static MainFragment mainInstance() {
+        MainFragment mainFragment = new MainFragment();
+        Bundle bundle = new Bundle();
+        mainFragment.setArguments(bundle);
+        return mainFragment;
+    }
+
     @Nullable
     @Override
     //onCreateView เป็น Method สำหรับสร้าง View MainFragment
