@@ -83,7 +83,6 @@ public class RegisterFragment extends Fragment {
                     //No Space ถ้าไม่ว่าง ให้ตรวจสอบว่า ใส่ค่า user&pass ถูกต้องหรือไม่
                     uploadValueToServer();
 
-
                 }
 
             }   //OnClickListener
