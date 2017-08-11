@@ -19,6 +19,7 @@ import org.json.JSONObject;
 import sdu.alice.wheresdu.GetAllUser;
 import sdu.alice.wheresdu.MyAlert;
 import sdu.alice.wheresdu.R;
+import sdu.alice.wheresdu.Service;
 
 /**
  * Created by aom on 6/7/2560.
@@ -130,6 +131,11 @@ public class MainFragment extends Fragment {
             } else if (strPassword.equals(strPasswordTrue)) {
                 //Password True ใส่ Password ถูกต้อง
                 Toast.makeText(getActivity(), "Welcome " + strName, Toast.LENGTH_SHORT).show(); //ถ้าใส่ user&pass ถูกต้องให้แสดงข้อความ Toast
+
+                //Intent to Service
+                Intent intent = new Intent(getActivity(), Service.class);
+                intent.putExtra("ID", strID);
+                getActivity().startActivity(intent);
 
             } else {
                 //Password False ใส่ Password ไม่ถูกต้อง
