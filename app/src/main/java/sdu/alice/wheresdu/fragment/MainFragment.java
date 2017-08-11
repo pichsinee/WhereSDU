@@ -135,7 +135,9 @@ public class MainFragment extends Fragment {
                 //Intent to Service
                 Intent intent = new Intent(getActivity(), Service.class);
                 intent.putExtra("ID", strID);
+                intent.putExtra("Name", strName);
                 getActivity().startActivity(intent);
+                getActivity().finish(); //เมื่อกด Login แล้ว Intent ไปที่ Map แล้ว ให้ปิดแอปเสมอ เพื่อ clear user&pass
 
             } else {
                 //Password False ใส่ Password ไม่ถูกต้อง
