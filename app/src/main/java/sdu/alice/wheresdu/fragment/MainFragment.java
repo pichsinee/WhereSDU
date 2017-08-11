@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -64,7 +65,7 @@ public class MainFragment extends Fragment {
 
         //Initial View
         userEditText = (EditText) getView().findViewById(R.id.edtUser);
-        passwordEditText = (EditText) getView().findViewById(R.id.edtUser);
+        passwordEditText = (EditText) getView().findViewById(R.id.edtPassword);
         Button button = (Button) getView().findViewById(R.id.btnLogin);
 
         //Check Space
@@ -102,14 +103,40 @@ public class MainFragment extends Fragment {
 
             String strJSON = getAllUser.get();  //ดึงข้อมูลเจอสันออกมาเป็น String ยาวๆ เรียงต่อกัน
             Log.d(tag, "JSON ==> " + strJSON);
+            boolean status = true; // true ==> user false ไม่มี user ใน DB
+            String strID = null;
+            String strName = null;
+            String strPasswordTrue = null;
 
             JSONArray jsonArray = new JSONArray(strJSON);
 
             for (int i=0; i<jsonArray.length(); i+=1) {
 
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
+                if (strUser.equals(jsonObject.getString("User"))) {
+                    status = false; // user ==> True  มี user อยู่จริง
+                    strID = jsonObject.getString("id"); //ตัวแปรสีเขียว ชื่อต้องตรงกับ field ใน DB
+                    strName = jsonObject.getString("Name");
+                    strPasswordTrue = jsonObject.getString("Password");
+                } //if
 
             } //For
+
+            //Check ๊User&Password ที่ป้อนเข้ามา
+            if (status) {   //ถ้า status เป็น True
+                //User False
+                MyAlert myAlert = new MyAlert(getActivity());
+                myAlert.myDialog("User False", "No this user in my database");
+            } else if (strPassword.equals(strPasswordTrue)) {
+                //Password True ใส่ Password ถูกต้อง
+                Toast.makeText(getActivity(), "Welcome " + strName, Toast.LENGTH_SHORT).show(); //ถ้าใส่ user&pass ถูกต้องให้แสดงข้อความ Toast
+
+            } else {
+                //Password False ใส่ Password ไม่ถูกต้อง
+                MyAlert myAlert = new MyAlert(getActivity());
+                myAlert.myDialog("Password False", "Please try again, Password False!!");
+            }
+
 
         } catch (Exception e) {
             e.printStackTrace();
