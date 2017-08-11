@@ -1,21 +1,21 @@
 package sdu.alice.wheresdu.fragment;
 
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.ImageView;
+        import android.os.Bundle;
+        import android.support.annotation.Nullable;
+        import android.support.v4.app.Fragment;
+        import android.util.Log;
+        import android.view.LayoutInflater;
+        import android.view.View;
+        import android.view.ViewGroup;
+        import android.widget.Button;
+        import android.widget.EditText;
+        import android.widget.ImageButton;
+        import android.widget.ImageView;
 
-import sdu.alice.wheresdu.MyAlert;
-import sdu.alice.wheresdu.MyConstant;
-import sdu.alice.wheresdu.PostNewUser;
-import sdu.alice.wheresdu.R;
+        import sdu.alice.wheresdu.MyAlert;
+        import sdu.alice.wheresdu.MyConstant;
+        import sdu.alice.wheresdu.PostNewUser;
+        import sdu.alice.wheresdu.R;
 
 /**
  * Created by aom on 6/7/2560.
